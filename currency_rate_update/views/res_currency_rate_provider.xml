@@ -23,7 +23,7 @@
                 <field name="service"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="update_schedule"/>
-                <field name="available_currency_ids" invisible="1"/>
+                <field name="available_currency_ids" widget="many2many_tags" invisible="1"/>
                 <field name="currency_ids" widget="many2many_tags"/>
                 <field name="next_run"/>
             </tree>
@@ -62,7 +62,7 @@
                             <field name="next_run"/>
                         </group>
                         <group>
-                            <field name="available_currency_ids" invisible="1"/>
+                            <field name="available_currency_ids" invisible="0" widget="many2many_tags"/>
                             <field name="currency_ids" widget="many2many_tags" options="{'no_create_edit': True}" domain="[('id', 'in', available_currency_ids)]"/>
                         </group>
                     </group>

@@ -6,3 +6,4 @@ from . import res_currency_rate
 from . import res_currency_rate_provider
 from . import res_currency_rate_provider_ECB
 from . import res_currency_rate_provider_SUNAT
+from . import res_currency_rate_provider_BNR
