@@ -34,16 +34,16 @@ class ResCurrencyRateProvider(models.Model):
         required=True,
     )
     available_currency_ids = fields.Many2many(
-        string='Available Currencies',
+        string='API Currencies', help='Available Currencies from api filtered by company active currencies',
         comodel_name='res.currency',
         compute='_compute_available_currency_ids',
     )
     currency_ids = fields.Many2many(
-        string='Currencies',
+        string='Currencies to Update',
         comodel_name='res.currency',
         column1='provider_id',
         column2='currency_id',
-        help='Currencies to be updated by this provider',
+        help='Currencies to update with this service. Is a subset of Available Currencies',
     )
     name = fields.Char(
         string='Name',
@@ -125,13 +125,8 @@ class ResCurrencyRateProvider(models.Model):
         Currency = self.env['res.currency']
 
         for provider in self:
-            provider.available_currency_ids = Currency.search(
-                [(
-                    'name',
-                    'in',
-                    provider._get_supported_currencies()
-                )],
-            )
+            supported_currencies_ids = Currency.search([('name','in',provider._get_supported_currencies())] ) 
+            provider.available_currency_ids = [(6, 0, [x.id for x in supported_currencies_ids])] 
 
     def _update(self, date_from, date_to, newest_only=False):
         Currency = self.env['res.currency']
