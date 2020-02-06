@@ -39,8 +39,8 @@ class ResCurrencyRateProviderSUNAT(models.Model):
         # This provider only serves EUR-to-??? exchange rates
         if base_currency != 'PEN':  # pragma: no cover
             raise UserError(_(
-                'European Central Bank is suitable only for companies'
-                ' with EUR as base currency!'
+                'SUNAT is suitable only for companies'
+                ' with PEN as base currency!'
             ))
 
         # Depending on the date range, different URLs are used
@@ -60,5 +60,3 @@ class ResCurrencyRateProviderSUNAT(models.Model):
                     continue
                 res[data.get('date')][rate[0].get('name')] = rate[0].get('sale_value')
         return res
-
-
