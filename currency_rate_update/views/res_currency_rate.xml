@@ -5,6 +5,18 @@
 -->
 <odoo>
 
+   <record model="ir.ui.view" id="view_noeditable_currency_rate_tree">
+        <field name="name">view_noeditable_currency_rate_tree</field>
+        <field name="model">res.currency.rate</field>
+        <field name="inherit_id" ref="base.view_currency_rate_tree"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//tree" position="attributes">
+                <attribute name="editable" />
+            </xpath>
+        </field>
+    </record>
+
+
     <record model="ir.ui.view" id="view_currency_rate_form">
         <field name="name">res.currency.rate.form</field>
         <field name="model">res.currency.rate</field>
@@ -19,7 +31,15 @@
             <field name="rate" position="after">
                 <field name="provider_id" readonly="1"/>
             </field>
-        </field>
+<!--             <sheet position='after'>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+            
+            </sheet>
+ -->        </field>
     </record>
 
 </odoo>

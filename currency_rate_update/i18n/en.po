@@ -96,16 +96,16 @@ msgstr "Created on"
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_res_currency_rate_provider__currency_ids
 #, fuzzy
-#| msgid "Currencies available"
-msgid "Currencies"
-msgstr "Currencies available"
+#| msgid "Currencies to Update"
+msgid "Currencies to Update"
+msgstr "Currencies to Update"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,help:currency_rate_update.field_res_currency_rate_provider__currency_ids
 #, fuzzy
-#| msgid "Currencies to update with this service"
-msgid "Currencies to be updated by this provider"
-msgstr "Currencies to update with this service"
+#| msgid "Currencies to update with this service. Is a subset of Available Currencies"
+msgid "Currencies to update with this service. Is a subset of Available Currencies"
+msgstr "Currencies to update with this service. Is a subset of Available Currencies"
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_currency_rate
