@@ -17,7 +17,8 @@
         'base'
     ],
     'data': [
-        'views/res_currency_view.xml'
+        'views/res_currency_view.xml',
+        'views/res_currency_rate.xml',
     ],
     "installable": True
 }

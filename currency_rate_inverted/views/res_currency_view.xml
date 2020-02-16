@@ -7,7 +7,8 @@
         <field name="inherit_id" ref="base.view_currency_tree"/>
         <field name="arch" type="xml">
             <field name="rate" position="after">
-                <field name="rate_inverted"/>
+            	<field name='inverted_rate' digits="[12,4]"/>
+                <field name="rate_inverted" optional='hide'/>
             </field>
         </field>
     </record>
@@ -18,7 +19,8 @@
         <field name="inherit_id" ref="base.view_currency_form"/>
         <field name="arch" type="xml">
             <field name="rate" position="after">
-                <field name="rate_inverted"/>
+ 				<field name='inverted_rate' digits="[12,4]"/>
+                <field name="rate_inverted" optional='hide'/>
             </field>
         </field>
     </record>
