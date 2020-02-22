@@ -176,10 +176,12 @@ class ResCurrencyRateProvider(models.Model):
                                 'rate': rate,
                             }
                         )
-                    rate = provider._process_rate(
-                        currency,
-                        rate
-                    )
+#   no more purpose of this function because if is inverted, functions will return inverted
+# or keep this and no more rate inverted
+#                     rate = provider._process_rate(
+#                         currency,
+#                         rate
+#                     )
 
                     record = CurrencyRate.search([
                         ('company_id', '=', provider.company_id.id),
@@ -213,47 +215,49 @@ class ResCurrencyRateProvider(models.Model):
             ) + self._get_next_run_period()
         ).date()
 
-    def _process_rate(self, currency, rate):
-        self.ensure_one()
-
-        Module = self.env['ir.module.module']
-
-        currency_rate_inverted = Module.sudo().search([
-            ('name', '=', 'currency_rate_inverted'),
-            ('state', '=', 'installed'),
-        ], limit=1)
-
-        if type(rate) is dict:
-            inverted = rate.get('inverted', None)
-            direct = rate.get('direct', None)
-            if inverted is None and direct is None:
-                raise UserError(
-                    _(
-                        'Invalid rate from %(provider)s for'
-                        ' %(currency)s : %(rate)s'
-                    ) % {
-                        'provider': self.name,
-                        'currency': currency.name,
-                        'rate': rate,
-                    }
-                )
-            elif inverted is None:
-                inverted = 1/direct
-            elif direct is None:
-                direct = 1/inverted
-        else:
-            rate = float(rate)
-            direct = rate
-            inverted = 1/rate
-
-        value = direct
-        if currency_rate_inverted and \
-                currency.with_context(
-                    force_company=self.company_id.id
-                ).rate_inverted:
-            value = inverted
-
-        return value
+#   no more purpose of this function because if is inverted, functions will return inverted
+# or keep this and no more rate inverted
+#     def _process_rate(self, currency, rate):
+#         self.ensure_one()
+# 
+#         Module = self.env['ir.module.module']
+# 
+#         currency_rate_inverted = Module.sudo().search([
+#             ('name', '=', 'currency_rate_inverted'),
+#             ('state', '=', 'installed'),
+#         ], limit=1)
+# 
+#         if type(rate) is dict:
+#             inverted = rate.get('inverted', None)
+#             direct = rate.get('direct', None)
+#             if inverted is None and direct is None:
+#                 raise UserError(
+#                     _(
+#                         'Invalid rate from %(provider)s for'
+#                         ' %(currency)s : %(rate)s'
+#                     ) % {
+#                         'provider': self.name,
+#                         'currency': currency.name,
+#                         'rate': rate,
+#                     }
+#                 )
+#             elif inverted is None:
+#                 inverted = 1/direct
+#             elif direct is None:
+#                 direct = 1/inverted
+#         else:
+#             rate = float(rate)
+#             direct = rate
+#             inverted = 1/rate
+# 
+#         value = direct
+#         if currency_rate_inverted and \
+#                 currency.with_context(
+#                     force_company=self.company_id.id
+#                 ).rate_inverted:
+#             value = inverted
+# 
+#         return value
 
     def _get_next_run_period(self):
         self.ensure_one()
